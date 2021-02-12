@@ -8,30 +8,27 @@ const cryptr = new Cryptr('myTotalySecretKey');
 
 var createNewUser = (userData, callback) => {
     try {
-        
-        userAccess.getUserData(userData,(err,result)=>{
-            console.log(result);
-            if(result.length == 0){
-                const user_password = cryptr.encrypt(userData.user_password);
+        userAccess.getUserData(userData,(err,result1)=>{
+            if(result1.length == 0){
+                const user_password = cryptr.encrypt(userData.student_password);
                 userAccess.createNewUser(userData,user_password, (err, result) => {
                     try {
                         if (err) {
                             throw new InternalServerError('Inetrnal server error, we are tarcking these issues.')
                         }
-                        callback({"Message":"User Created Successfully"});
+                        callback(result);
                     }
                     catch (error) {
                         requestHandler.HandleRequest(error, (result) => {
                             callback(result);
                         })
                     }
-                });
-            }else if(userData.email == result[0].email){
-                callback({"Message":"Email Already Exists try another Email"})
+                }); 
             }else{
-                callback({"Message":"Invalid Data"});
+                callback("Warning User Already Registered")
             }
         });
+  
 
     } catch (error) {
         requestHandler.HandleRequest(error, (result) => {

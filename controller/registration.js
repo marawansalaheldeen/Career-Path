@@ -5,18 +5,18 @@ var createNewUser = async (req, res) => {
 
     try {
         const userData = {
-            first_name:req.body.first_name,
-            last_name:req.body.last_name,
-            email:req.body.email,
-            user_password:req.body.user_password,
-            phone_number:req.body.phone_number,
-            city:req.body.city_id,
-            address_line:req.body.address_line,
-            pin_code:req.body.pin_code
+            student_name:req.body.student_name,
+            student_registration_number:req.body.student_registration_number,
+            pin_code:req.body.pin_code,
+            year_of_entrance:req.body.year_of_entrance,
+            total_credit_hour:req.body.total_credit_hour,
+            department_id:req.body.department_id,
+            student_email:req.body.student_email,
+            student_password:req.body.student_password
         }
         
         await userService.createNewUser(userData,(result)=>{
-            res.send(result);
+            res.send({"Server_Response":result});
         })
     } catch (error) {
         console.log(error);

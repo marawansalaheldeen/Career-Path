@@ -10,15 +10,15 @@ var createNewUser = (userData, callback) => {
     try {
         userAccess.getUserData(userData,(err,result1)=>{
             if(result1.length == 0){
-                const user_password = cryptr.encrypt(userData.student_password);
-                userAccess.createNewUser(userData,user_password, (err, result) => {
+                const pin_code = cryptr.encrypt(userData.pin_code);
+                console.log(pin_code);
+                userAccess.createNewUser(userData,pin_code, (err, result) => {
                     try {
                         if (err) {
                             throw new InternalServerError('Inetrnal server error, we are tarcking these issues.')
                         }
                         callback(result);
-                    }
-                    catch (error) {
+                    }catch (error) {
                         requestHandler.HandleRequest(error, (result) => {
                             callback(result);
                         })
@@ -47,25 +47,24 @@ var userLogin = (loginData, callback) => {
                 
                 if(result.length != 0){
 
-                    const userdatabasepassword = result[0].user_password;
+                    const userdatabasepassword = result[0].pin_code;
                     const decryptdPassword = cryptr.decrypt(userdatabasepassword);
                     
-                    console.log(result[0].user_id);
-                    if(loginData.user_password === decryptdPassword){
-                        const token = tokenConfig.createToken(loginData.email);
-                        userAccess.insertLoginData(result[0].user_id,(err,result2)=>{
+                    
+                    if(loginData.pin_code === decryptdPassword){
+                        const token = tokenConfig.createToken(loginData.student_registration_number);
+
                             callback({
                                 "Message":"You Logged In Successfully",
-                                "user_id":result[0].user_id,
-                                "first_name":result[0].first_name,
-                                "last_name":result[0].last_name,
-                                "user_email":result[0].email,
-                                "phone_number":result[0].phone_number,
-                                "city_id":result[0].city_id,
-                                "address_line":result[0].address_line,
+                                "student_id":result[0].student_id,
+                                "student_name":result[0].student_name,
+                                "student_registration_number":result[0].student_registration_number,
+                                "pin_code":result[0].pin_code,
+                                "year_of_entrance":result[0].year_of_entrance,
+                                "total_credit_hour":result[0].total_credit_hour,
+                                "department_id":result[0].department_id,
                                 "usertoken":token
                             });
-                        });
                     }else{
                         callback("Wrong Email Or Password");
                     }

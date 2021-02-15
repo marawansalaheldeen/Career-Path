@@ -11,8 +11,7 @@ var createNewUser = async (req, res) => {
             year_of_entrance:req.body.year_of_entrance,
             total_credit_hour:req.body.total_credit_hour,
             department_id:req.body.department_id,
-            student_email:req.body.student_email,
-            student_password:req.body.student_password
+            student_email:req.body.student_email
         }
         
         await userService.createNewUser(userData,(result)=>{
@@ -29,8 +28,8 @@ var userLogin = async(req,res)=>{
     try {
         
     const loginData = {
-        email:req.body.email,
-        user_password:req.body.user_password
+        student_registration_number:req.body.student_registration_number,
+        pin_code:req.body.pin_code
     }
     
     await userService.userLogin(loginData,(result)=>{

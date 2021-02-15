@@ -6,8 +6,8 @@ const jwtKey = require('./auth.config');
 const jwtExpirySeconds = '8000s'; // 24 hours
 
 // create token by user email
-const createToken = (userEmail) => {
-    const claims = { issuer: userEmail, subject: 'auth' }
+const createToken = (student_registration_number) => {
+    const claims = { issuer: student_registration_number, subject: 'auth' }
     return token = jwt.sign(claims, jwtKey.secret.authkey, { expiresIn: jwtExpirySeconds })
 }
 

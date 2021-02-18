@@ -1,10 +1,10 @@
-const departmentDataAccess = require('../dataAccess/department.js');
+const courseService = require('../dataAccess/course.js');
 const { BadRequestError, InternalServerError, NotFound } = require('../helper/exception.js');
 const requestHandler = require('../helper/requestHandler.js');
 
-const createDepartment = (deptData, callback)=>{
+const createCourse = (courseData, callback)=>{
     try{
-        departmentDataAccess.createDepartment(deptData, (err, result)=>{
+        courseService.createCourse(courseData, (err, result)=>{
             try {
                 if (err) {
                     console.log(err)
@@ -26,5 +26,5 @@ const createDepartment = (deptData, callback)=>{
 }
 
 module.exports = {
-    createDepartment
+    createCourse
 }

@@ -1,10 +1,10 @@
-const departmentDataAccess = require('../dataAccess/department.js');
+const trainingCompanyDataAccess = require('../dataAccess/training.js');
 const { BadRequestError, InternalServerError, NotFound } = require('../helper/exception.js');
 const requestHandler = require('../helper/requestHandler.js');
 
-const createDepartment = (deptData, callback)=>{
+const createTraining = (trainingData, callback)=>{
     try{
-        departmentDataAccess.createDepartment(deptData, (err, result)=>{
+        trainingCompanyDataAccess.creataeTraining(trainingData, (err, result)=>{
             try {
                 if (err) {
                     console.log(err)
@@ -26,5 +26,5 @@ const createDepartment = (deptData, callback)=>{
 }
 
 module.exports = {
-    createDepartment
+    createTraining
 }

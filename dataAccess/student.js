@@ -31,7 +31,7 @@ var chooseCareer = (data,callback) => {
     UPDATE student SET 
     career_id=${data.career_id} , 
     training_company_id = ${data.training_company_id} , 
-    training_status = ${data.training_status} 
+    training_status = '${data.training_status}' 
     WHERE student_id = ${data.student_id}`
     ,(err, result) => {
          if(err) {

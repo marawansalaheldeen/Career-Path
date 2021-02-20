@@ -32,7 +32,7 @@ var chooseCareer = async (req, res) => {
         training_status:req.body.training_status
     }
     try {
-        await getDataService.chooseCareer(data,(result)=>{
+        await studentService.chooseCareer(data,(result)=>{
             res.send({"Server_Response":result});
         })
     } catch (error) {
